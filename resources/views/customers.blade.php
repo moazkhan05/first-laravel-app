@@ -39,7 +39,19 @@
                     </div>
 
                     <div class="form-group ">
-                    <label for="phone_number" class="pr-3 col-md-4 col-sm-12">*Status</label>
+                    <label for="company_id" class="pr-3 col-md-4 col-sm-12">*Company</label>
+                        <select name="company_id" id="company_id" class="form-control col-md-8 col-sm-12">
+                            @foreach($companies as $company)
+                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                            @endforeach
+                        </select>  
+                        {{-- <div>
+                        {{$errors->first('company_id')}}
+                        </div> --}} 
+                    </div>
+
+                    <div class="form-group ">
+                    <label for="active" class="pr-3 col-md-4 col-sm-12">*Status</label>
                         <select name="active" id="active" class="form-control col-md-8 col-sm-12">
                             <option value="" disabled>Select Customer Status</option>
                             <option value="1">Active</option>
@@ -64,7 +76,7 @@
             <h3>Active Customers</h3>
             <ul>
                 @foreach($activeCustomers as $activeCustomer)
-                    <li>{{$activeCustomer->name}} <span class="text-muted"> ({{$activeCustomer->email}}) ({{$activeCustomer->phone_number}}) </span></li>
+                    <li>{{$activeCustomer->name}} <span class="text-muted"> ( {{$activeCustomer->email}} ) ( {{$activeCustomer->company->name}} ) </span></li>
                 @endforeach          
             </ul>
         </div>
@@ -73,9 +85,22 @@
             <h3>Inactive Customers</h3>
             <ul>
                 @foreach($inActiveCustomers as $inActiveCustomer)
-                    <li>{{$inActiveCustomer->name}} <span class="text-muted"> ({{$inActiveCustomer->email}}) ({{$inActiveCustomer->phone_number}}) </span></li>
+                    <li>{{$inActiveCustomer->name}} <span class="text-muted"> ( {{$inActiveCustomer->email}} ) ( {{$inActiveCustomer->company->name}} ) </span></li>
                 @endforeach          
             </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+            @foreach ($companies as $company)
+                <h4>{{ $company->name }}</h4>
+                <ul>
+                    @foreach ($company->customers as $customer)
+                    <li>{{ $customer->name }}</li>
+                    @endforeach   
+                </ul>
+            @endforeach   
+            </div>
         </div>
     </div>
       

@@ -3,16 +3,13 @@
 namespace App;
 use App\Customer;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
     /*fillable attributes are used to specify those fields which are to be mass assigned. Guarded attributes are used to specify those fields which are not mass assignable*/
 
-    //Fillable Example
-    //protected $fillable = ['name','email','phone_number','active'];
-
-   
     //guarded Example
     protected $guarded = [];
 
@@ -22,6 +19,11 @@ class Customer extends Model
 
     public function scopeInactive($query){
         return $query->where('active',0);
+    }
+
+     //defining relation between companpy and customers
+     public function company(){
+        return $this->belongsTo(Company::class);
     }
 }
 

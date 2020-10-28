@@ -8,12 +8,12 @@
             <h1>Customer Details</h1>
             <p><a href="/customers/{{ $customer->id }}/edit">Edit</a></p>
 
-            <form action="/customers/{{$customer->id}}" method="POST">
+           {{-- blade comment <form action="/customers/{{$customer->id}}" method="POST">
                 @method('DELETE')
                 @csrf
 
                 <button class="btn btn-danger" type="submit">Delete</button>
-            </form>
+            </form> --}}
         </div>
     </div>
     <div class="row">

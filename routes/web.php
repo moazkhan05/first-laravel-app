@@ -19,5 +19,7 @@ Route::view('about','about');
 Route::view('contact','contact'); //Route::View == Route::get('route',function (){return view('route.blade.php')})
 
 //passing data to routes
-Route::get ('customers','CustomersController@list');
-Route::post ('customers','CustomersController@store');
+Route::get ('customers','CustomersController@index'); //index page
+Route::get ('customers/create','CustomersController@create'); //create 
+Route::post ('customers','CustomersController@store'); //stores
+Route::get ('customers/{customer}','CustomersController@show'); //show the newly added customer

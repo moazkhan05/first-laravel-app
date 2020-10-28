@@ -13,13 +13,14 @@ class Customer extends Model
     //guarded Example
     protected $guarded = [];
 
+    protected $attributes = [
+        'active' => 1
+    ];
+
     /*Accessors and mutators allow you to format interject any call that we want and do something before either display or save in db.*/
     //Accessor Example
     public function getActiveAttribute($attribute){
-        return[
-            0=>'Inactive',
-            1=>'Active',
-        ][$attribute];
+        return $this->activeOptions()[$attribute];
     }
 
     public function scopeActive($query){
@@ -33,6 +34,14 @@ class Customer extends Model
      //defining relation between companpy and customers
      public function company(){
         return $this->belongsTo(Company::class);
+    }
+
+    public function activeOptions()
+    {
+        return [
+            1=>'Active',
+            0=>'Inactive',
+        ];
     }
 }
 

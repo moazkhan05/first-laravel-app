@@ -22,4 +22,7 @@ Route::view('contact','contact'); //Route::View == Route::get('route',function (
 Route::get ('customers','CustomersController@index'); //index page
 Route::get ('customers/create','CustomersController@create'); //create 
 Route::post ('customers','CustomersController@store'); //stores
-Route::get ('customers/{customer}','CustomersController@show'); //show the newly added customer
+Route::get ('customers/{customer}','CustomersController@show'); //show the customer's details
+Route::get ('customers/{customer}/edit ','CustomersController@edit'); //display the edit form for customer
+Route::put ('customers/{customer} ','CustomersController@update'); //upldates details and redirect to show page
+Route::delete ('customers/{customer} ','CustomersController@destroy'); //deletes customer records but that should not be tha part in real life

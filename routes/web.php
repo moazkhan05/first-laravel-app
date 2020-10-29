@@ -14,11 +14,11 @@
 Route::view('/', 'home');
 Route::view('/welcome', 'welcome');
 
-Route::view('about','about');
+Route::view('about','about')->middleware('test');
 Route::get('contact','ContactFormController@create'); 
 Route::post('contact','ContactFormController@store'); 
 
-Route::resource('customers','CustomersController');
+Route::resource('customers','CustomersController')->middleware('auth');
 
 Auth::routes();
 

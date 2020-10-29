@@ -18,7 +18,7 @@ Route::view('about','about')->middleware('test');
 Route::get('contact','ContactFormController@create'); 
 Route::post('contact','ContactFormController@store'); 
 
-Route::resource('customers','CustomersController')->middleware('auth');
+Route::resource('customers','CustomersController');
 
 Auth::routes();
 

@@ -8,6 +8,11 @@ use App\Company;
 
 class CustomersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
+
     //function to show customerslist (directing to index)
     public function index(){
         $customers=Customer::all(); 

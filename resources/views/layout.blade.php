@@ -21,6 +21,12 @@
             @include ('nav')
         <!-- navigation end -->
 
+        @if(session()->has('success_message_send'))
+            <div class="alert alert-success" role="alert">
+                <strong>Success</strong>{{ session()->get('success_message_send') }}
+            </div>
+        @endif
+
             @yield('content')
         </div>
   

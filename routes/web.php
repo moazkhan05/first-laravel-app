@@ -11,10 +11,19 @@
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'home');
+Route::view('/welcome', 'welcome');
 
 Route::view('about','about');
 Route::get('contact','ContactFormController@create'); 
 Route::post('contact','ContactFormController@store'); 
 
 Route::resource('customers','CustomersController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

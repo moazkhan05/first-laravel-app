@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Customer;
 use App\Company;
+use App\Customer;
+use Illuminate\Http\Request;
+use App\Events\newCustomerRegisterEvent;
+
 
 class CustomersController extends Controller
 {
@@ -28,8 +30,11 @@ class CustomersController extends Controller
 
     //function to store customer's record in database
     public function store(){  
-        Customer::create($this->validateRequest()); //mass assgining data
-        return redirect('customers');
+        $customer = Customer::create($this->validateRequest()); //mass assgining data
+        
+        event(new newCustomerRegisterEvent($customer));
+       // dump('send via slack');
+        //return redirect('customers');
     }
 
     //function to display newly added customer
@@ -46,11 +51,11 @@ class CustomersController extends Controller
         return redirect('customers/' .$customer->id);
     }
 
-    // public function destroy(Customer $customer)
-    // {
-    //     $customer->delete();
-    //    return redirect ('customers');
-    // }
+    public function destroy(Customer $customer)
+    {
+        $customer->delete();
+       return redirect ('customers');
+    }
 
     //validation method
     public function validateRequest()

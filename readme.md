@@ -264,3 +264,5 @@ setup account at mailtrap
 	move inside inboxes and then my inbox
  	click on settings in integration select which type of credentials you need
 	and start working 
+
+	

@@ -265,4 +265,35 @@ setup account at mailtrap
  	click on settings in integration select which type of credentials you need
 	and start working 
 
-	
+### Events & Listener
+##### Events : Something happened. In laravel, Event classes are typically stored in the app/Events directory, while their li. 
+##### Listener : Respond for the occurring event listeners are stored in app/Listeners
+
+Laravel provides a convenient place to register all of your application's event listeners in App/Providers/EventServiceProvider.php
+make:event
+In EventServiceProvider.php you define what listeners should be called when a particular event occurred
+
+##### How to define Events and Listeners manually:
+php artisan make:event <event-name>
+php artisan make:listener <event-name>
+
+then map listeners with events in EventServiceProvider.php
+
+###### manually creating the files for each event and listener is cumbersome. 
+Instead, add listeners and events to your EventServiceProvider and 
+#### use the event:generate command. 
+This command will generate any events or listeners that are listed in your EventServiceProvider. Events and listeners that already exist will be left untouched
+
+### Queues
+Queues used 
+
+### Model Factory
+When testing, you may need to insert a few records into your database before executing your test. Instead of manually specifying the value of each column when you create this test data, Laravel allows you to define a default set of attributes for each of your Eloquent models using model factories.
+
+To create a factory, use 
+##### php artisan make:factory PostFactory --model=Post
+
+use php artisan tinker to add fake data
+factory(\App\Company::class)->create(); 
+factory method use class path as an argument and call second method as create
+we can pass second parameter in factory method as how many data we want to enter in.

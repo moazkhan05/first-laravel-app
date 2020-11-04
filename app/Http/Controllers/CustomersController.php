@@ -34,7 +34,7 @@ class CustomersController extends Controller
         
         event(new newCustomerRegisterEvent($customer));
        // dump('send via slack');
-        //return redirect('customers');
+        return redirect('customers');
     }
 
     //function to display newly added customer

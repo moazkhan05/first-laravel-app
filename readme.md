@@ -404,3 +404,24 @@ means get all customers with the company
 Now using the second query , it will get all result in 2 queries 
 1 for customers
 2 for all the companies
+
+### PAGINATION
+
+pagination helps to breakup your records into set of numbers so then you can divide them in different pages.
+
+Let's say we want 5 or 10 records of customers per page
+
+To achieve this , In our customerController@index method we will
+replace :  $customers=Customer::with('company')->get();
+with :  $customers=Customer::with('company')->paginate(10);
+
+and in customers\index.blade.php  
+
+add this snippet after form tag
+
+		<div class="row">
+            <div class="col-12 text-center">
+            {{ $customers->links() }}
+            </div>
+        </div>
+blade syntax for links

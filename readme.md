@@ -388,4 +388,19 @@ php artisan migrate
 It helps you to look into queries , requests , commands , logs , errors and more
 
 
+### Lazy Loading vs. Eager Loading (Fixing N + 1 Problem)
 
+In our customer's index we actually calling customers and for each customers we run query to get companies name 
+
+As we are using RDB we can fetch customer and their corresponding company in a single command
+
+To achieve the desired result , in our customerController class 
+
+replace: $customers=Customer::all(); 
+with : $customers=Customer::with('company')->get();
+
+means get all customers with the company
+
+Now using the second query , it will get all result in 2 queries 
+1 for customers
+2 for all the companies

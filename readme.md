@@ -326,4 +326,19 @@ Let's take an example
 As every customer is associated with a company. So inside Customer Factory we will define 
   'company_id' => factory(Company::class)->create();
   this means : create a new company and assigned its id to customer company id.
-  
+
+//
+factory(App\User::class, 50)->create()->each(function ($user) {
+        $user->posts()->save(factory(App\Post::class)->make());
+    });
+
+we can add this line in DBseeder file , it will add 50 users in db and add post corresponding to every user
+we can use saveMany() function as well but i think its good to define in factory Class intead of in seeder
+//
+somehow, we can define our customer class like this:
+
+$factory->define(App\Customer::class, function (Faker\Generator $faker) {
+    return [
+        'company_id' => random_int(\DB::table('companies')->min('id'), \DB::table('companies')->max('id')),
+    ];
+});  

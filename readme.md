@@ -146,6 +146,8 @@ php artisan tinker
 
 ### Defining relation between two tables in laravel 5.8
 
+##### hasMany & belogsTo -> manyToOne
+
 write functions in both files with inverse logic
 
 in ./app/company.php
@@ -159,6 +161,8 @@ in ./app/customer.php
 public function company(){
 return $this->belongsTo(Company::class);
 }
+
+
 
 ### Accessors
 using accessors and mutators to display Active and inactive istead of  1 & 0
@@ -267,6 +271,31 @@ setup account at mailtrap
  	click on settings in integration select which type of credentials you need
 	and start working 
 
+### Authentication / Auth
+Laravel ships with several pre-built authentication controllers, which are located in the App\Http\Controllers\Auth namespace. The RegisterController handles new user registration, the LoginController handles authentication, the ForgotPasswordController handles e-mailing links for resetting passwords, and the ResetPasswordController contains the logic to reset passwords. Each of these controllers uses a trait to include their necessary methods. For many applications, you will not need to modify these controllers at all.
+
+Routing
+
+Laravel provides a quick way to scaffold all of the routes and views you need for authentication using one simple command:
+
+php artisan make:auth
+
+This command should be used on fresh applications and will install a layout view, registration and login views, as well as routes for all authentication end-points. A HomeController will also be generated to handle post-login requests to your application's dashboard.
+
+### Custom Middleware 
+you can ceate your own middlewares by
+php artisan  make:migration [options] [--] <name>
+
+your custom middleware will be located in \App\Http\Middleware directory
+
+now to register your middleware you have to go \App\Http\Kernel.php file
+where you define when your middleware work
+1. to run during every request to your application.
+2. to run on routes of your application.
+3. assigned to groups or used individual on routes / controllers
+4. prioritize your middlewares , which middleware should execute first
+
+
 ### Events & Listener
 ##### Events : Something happened. In laravel, Event classes are typically stored in the app/Events directory, while their li. 
 ##### Listener : Respond for the occurring event listeners are stored in app/Listeners
@@ -337,8 +366,26 @@ we can use saveMany() function as well but i think its good to define in factory
 //
 somehow, we can define our customer class like this:
 
+Here is how I made it to work: --> first seed the user table -->then query the user table for min and max User ID from within the faker setup (I do random assignment)
+
 $factory->define(App\Customer::class, function (Faker\Generator $faker) {
     return [
         'company_id' => random_int(\DB::table('companies')->min('id'), \DB::table('companies')->max('id')),
     ];
 });  
+
+### Telescope
+Telescope is an elegant debug assistant for the Laravel framework. Telescope provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more.
+A way to find out what's going on behind the scene
+
+Installation : composer require "laravel/telescope":"~1.0"
+
+After installing Telescope, you should also run the migrate command:
+
+php artisan telescope:install
+php artisan migrate
+
+It helps you to look into queries , requests , commands , logs , errors and more
+
+
+

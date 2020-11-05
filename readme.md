@@ -72,7 +72,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 
-## My documentation and concepts
+# Learning Outcomes
 Laravel Tutorials
 
 To define model and its migration file
@@ -172,7 +172,9 @@ return[
 }
 
 
-### MOdel Binding
+### Model Binding
+
+
 #### Code Refactoring for Routes 
 if you passed route as /customers/{customer}
 and using $customer as show method parameter
@@ -297,3 +299,31 @@ use php artisan tinker to add fake data
 factory(\App\Company::class)->create(); 
 factory method use class path as an argument and call second method as create
 we can pass second parameter in factory method as how many data we want to enter in.
+
+### Seeders
+A database seeder is comprised of all of the necessary code to generate a world's worth of data for our app. A table seeder is an individual seeder for a particular table. Learn all about both of us, in this lesson.
+
+Seeders are used to generate data. You can use seeders in production as well but most common use  of seeders is to generate data for development purpose
+Seeders allows you to use model factory methods to generate all data in one go. 
+
+Alot of times, you have to delete all records and generate database again, because of migrations
+In this scenario, Model Factories & DB seeders helps you to continue development.
+
+###### How to create SEEDERS
+php artisan make:seeder <tableNameSeeder>
+example: php artisan make:seeder UsersTableSeeder
+
+It will create UsersTableSeeders.php file in ~\database\seeds
+
+go into that file and use factory method.
+
+###### How to run SEEDERS
+php artisan db:seed
+
+now if you have relations in table.
+How would you seed them?
+Let's take an example
+As every customer is associated with a company. So inside Customer Factory we will define 
+  'company_id' => factory(Company::class)->create();
+  this means : create a new company and assigned its id to customer company id.
+  

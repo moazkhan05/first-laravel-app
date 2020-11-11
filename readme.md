@@ -425,3 +425,25 @@ add this snippet after form tag
             </div>
         </div>
 blade syntax for links
+
+
+### Authorization
+There are two ways of authentication in laravel 
+1. Policies
+2. Gates
+
+##### 1. Policies
+Policies are classes that organize authorization logic around a model or resource.
+To generate policy : php artisan make:policy <name>
+Policies attached with db tables. so we can define model as well while creating policy
+php artisan make:policy CustomerPolicy -m Customer
+means -> create policy CustomerPolicy for Customer model
+
+in CustomerPolicy 
+	return in_array($user -> isAdmin ,['1']); //restricting function to authorized only for those who have admin rights
+
+adding authorization layer in Controller
+ $this -> authorize('create', Customer::class); 
+
+##### 2. Gates
+Gates are used where authorization logic.

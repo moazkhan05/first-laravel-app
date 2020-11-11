@@ -30,6 +30,8 @@ class CustomersController extends Controller
 
     //function to store customer's record in database
     public function store(){  
+        $this -> authorize('create', Customer::class);
+
         $customer = Customer::create($this->validateRequest()); //mass assgining data
         
         event(new newCustomerRegisterEvent($customer));

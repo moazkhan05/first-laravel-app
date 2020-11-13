@@ -460,5 +460,26 @@ we have to wrap addbtn in @can
 @can takes two parameter, function and model class
 this means only those who allowed to create customer in policy can see what's written inside @can directive
 
+
+###### defining policies at route level 
+restricting unauthorized users to view customer details
+in CustomerPolicy
+	public function view(User $user, Customer $customer)
+    {
+        return in_array($user -> isAdmin,[1]);
+    }
+in routes/web.php
+	Route::get('customers/{customer}', 'CustomersController@show')->name('customers.show')->middleware('can:view,customer');
+
+and in index.blade.php 
+		@can('view',$customer)
+			<a href="/customers/{{$customer->id}}">{{ $customer->name }}</a>
+		@endcan
+//@can directive what authorized can see and perform
+		@cannot('view',$customer)
+			<p>{{ $customer->name }}</p>
+		@endcannot
+//@cannot what unauthorized users can perform
+
 ##### 2. Gates
 Gates are used where authorization logic.

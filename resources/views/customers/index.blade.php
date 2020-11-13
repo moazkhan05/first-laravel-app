@@ -23,7 +23,13 @@
         <div class="row">
             <div class="col-2">{{ $customer->id }}</div>
             <div class="col-4">
-                <a href="/customers/{{$customer->id}}">{{ $customer->name }}</a>
+                @can('view',$customer)
+                    <a href="/customers/{{$customer->id}}">{{ $customer->name }}</a>
+                @endcan
+
+                @cannot('view',$customer)
+                    <p>{{ $customer->name }}</p>
+                @endcannot
             </div>
             <div class="col-4">{{ $customer->company->name }}</div>
             <div class="col-2">{{ $customer->active }}</div>

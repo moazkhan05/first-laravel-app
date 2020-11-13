@@ -445,5 +445,20 @@ in CustomerPolicy
 adding authorization layer in Controller
  $this -> authorize('create', Customer::class); 
 
+through the above lines of code only admin can create customers
+so far we are able to secure our backend, if anyone curl directly into our application , we are secure
+
+to hide addCustomerBtn / form for unauthorized users 
+we have to wrap addbtn in @can
+ 
+ in index.blade.php
+
+  @can('create',App\Customer::class)
+  
+  @endcan
+
+@can takes two parameter, function and model class
+this means only those who allowed to create customer in policy can see what's written inside @can directive
+
 ##### 2. Gates
 Gates are used where authorization logic.
